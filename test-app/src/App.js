@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {logicalExpression} from "@babel/types";
+import Form from "./components/Form";
 
 class App extends Component {
     constructor(props) {
@@ -12,17 +13,7 @@ class App extends Component {
     }
 
 
-    handleMChange = ({target: { value }}) => {
-        this.setState({
-            m: value
-        });
-    };
 
-    handleNChange = ({target: { value }}) => {
-        this.setState({
-            n: value
-        });
-    };
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -40,7 +31,10 @@ class App extends Component {
             const row = [];
             for (let j = 0; j < n; j++) {
                 const random = this.getRandom();
-                row.push(random)
+                row.push({
+                    id: this.getID(),
+                    amount: random
+                })
             }
             matrix.push(row)
         }
@@ -56,25 +50,31 @@ class App extends Component {
         return Math.floor(Math.random()*(max-min))+min;
     };
 
+    getID = () => {
+    return Math.random().toString(36).substr(2, 9);
+    }
+
+    generateTable = () => {
+        this.state.matrix.map(row => {
+            return <tr>{row.map(td => <td>{td.amount}</td>)}</tr>
+        })
+    }
+
     render() {
-        const { n, m } = this.state;
+
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        type="text"
-                        value={m}
-                        onChange={this.handleMChange}
-                        name="M"
-                    />
-                    <input
-                        type="text"
-                        value={n}
-                        onChange={this.handleNChange}
-                        name="N"
-                    />
-                    <button type="submit">Create matrix</button>
-                </form>
+                <div>
+                    <Form m={this.state.m} n={this.state.n} onSubmit={this.handleSubmit} />
+                </div>
+                <hr/>
+                <div>
+                    <table>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         );
     }
