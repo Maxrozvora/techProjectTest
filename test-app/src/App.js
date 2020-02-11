@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {logicalExpression} from "@babel/types";
-import Form from "./components/Form";
+import TableCell from "./components/table/TableCell";
 
 class App extends Component {
     constructor(props) {
@@ -13,10 +12,18 @@ class App extends Component {
     }
 
 
+    handleChange = (e) => {
+        console.log('teste', e); // TODO console.log
+        const name = e.target.name;
+        this.setState({
+            [name]: e.target.value
+        });
+    };
 
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('test'); // TODO console.log
         this.generateMatrix();
         this.setState({
             m: '',
@@ -61,16 +68,34 @@ class App extends Component {
     }
 
     render() {
-
+        const { n, m } = this.state;
+        const table = this.state.matrix.map(tr => {
+            return <tr>{tr.map(td => <TableCell key={td.id} value={td.amount} />)}</tr>
+        })
         return (
             <div>
                 <div>
-                    <Form m={this.state.m} n={this.state.n} onSubmit={this.handleSubmit} />
+                    <form onSubmit={this.handleSubmit}>
+                        <input
+                            type="text"
+                            value={m}
+                            onChange={this.handleChange}
+                            name="m"
+                        />
+                        <input
+                            type="text"
+                            value={n}
+                            onChange={this.handleChange}
+                            name="n"
+                        />
+                        <button type="submit">Create matrix</button>
+                    </form>
                 </div>
                 <hr/>
                 <div>
                     <table>
                         <tbody>
+                            {table}
                         </tbody>
                     </table>
                 </div>
