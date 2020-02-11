@@ -17,7 +17,6 @@ class App extends Component {
     }
 
     handleChange = (e) => {
-        console.log('teste', e); // TODO console.log
         const name = e.target.name;
         this.setState({
             [name]: e.target.value
@@ -27,7 +26,6 @@ class App extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('test'); // TODO console.log
         this.generateMatrix();
         this.setState({
             m: '',
@@ -83,8 +81,14 @@ class App extends Component {
         const matrix = this.state.matrix;
         matrix[m][n].amount++;
         this.setState({matrix})
+    };
 
-    }
+    getAvg = (arr) => {
+        return arr.reduce((acc, cur) => {
+            cur.forEach((e, i) => acc[i] = acc[i] ? acc[i] + e.amount : e.amount);
+            return acc;
+        }, []).map(e => (e / arr.length).toFixed(1));
+    };
 
     render() {
         const { n, m, matrix } = this.state;
@@ -107,6 +111,10 @@ class App extends Component {
                 </td>
             </tr>
         });
+
+        const tableAvg = this.getAvg(matrix).map((td, i) => {
+            return <td key={i}>{td}</td>
+        })
 
 
 
@@ -143,6 +151,13 @@ class App extends Component {
                             </tbody>
                         </table>
                     </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            {tableAvg}
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );
