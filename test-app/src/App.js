@@ -7,7 +7,7 @@ class App extends Component {
         this.state = {
             matrix: [],
             m: 3,
-            n: 3,
+            n: 4,
             sum: []
         };
     }
@@ -90,6 +90,24 @@ class App extends Component {
         }, []).map(e => (e / arr.length).toFixed(1));
     };
 
+    removeRow = () => {
+
+    };
+    addRow = () => {
+        const res = [];
+        for (let i = 0; i < this.state.n; i++) {
+            res[i] = {
+                id: this.getID(),
+                amount: this.getRandom()
+            }
+        }
+        const matrix = this.state.matrix;
+        matrix.push(res);
+        this.setState({
+            matrix
+        })
+    };
+
     render() {
         const { n, m, matrix } = this.state;
         const table = matrix.map((tr, i) => {
@@ -158,6 +176,10 @@ class App extends Component {
                         </tr>
                         </tbody>
                     </table>
+                    <div>
+                        <button onClick={this.removeRow}>Remove row</button>
+                        <button onClick={this.addRow}>Add row</button>
+                    </div>
                 </div>
             </div>
         );
