@@ -77,21 +77,38 @@ class App extends Component {
             sum +=item.amount
         });
         return sum;
+    };
+
+    increaseValue = (m,n) => {
+        const matrix = this.state.matrix;
+        matrix[m][n].amount++;
+        this.setState({matrix})
+
     }
 
     render() {
-        const { n, m } = this.state;
-        const table = this.state.matrix.map((tr, i) => {
-            return <tr key={i}>{tr.map(td => <TableCell key={td.id} value={td.amount} />)}</tr>
+        const { n, m, matrix } = this.state;
+        const table = matrix.map((tr, i) => {
+            return <tr key={i}>{tr.map((td, j) =>
+                <TableCell
+                    key={td.id}
+                    value={td.amount}
+                    m={i}
+                    n={j}
+                    onIncreaseValue={this.increaseValue}
+                />
+                )}</tr>
         });
 
-        const tableSum = this.state.matrix.map((tr,i) => {
+        const tableSum = matrix.map((tr,i) => {
             return <tr key={i}>
                 <td>
                     {this.getSum(tr)}
                 </td>
             </tr>
-        })
+        });
+
+
 
         return (
             <div>
