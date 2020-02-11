@@ -62,13 +62,6 @@ class App extends Component {
     return Math.random().toString(36).substr(2, 9);
     };
 
-    generateTable = () => {
-        this.state.matrix.map(row => {
-            return <tr>{row.map(td => <td>{td.amount}</td>)}</tr>
-        })
-    };
-
-
     getSum = (arr) => {
         let sum = 0;
         arr.forEach(item => {
@@ -111,6 +104,29 @@ class App extends Component {
         })
     };
 
+    lightOn = (m,n) => {
+        // console.log('m,n',m,n); // TODO console.log
+        const matrix = this.state.matrix;
+        const number = matrix[m][n].amount;
+        console.log(number); // TODO console.log
+        // const closestRight = matrix.filter(n => n.amount > number)
+        let closestRight =  matrix[0][0];
+        let closestLeft  =  matrix[0][0];
+        matrix.forEach((data,i) => {
+            console.log('data', data); // TODO console.log
+            data.forEach(item => {
+                if (item.amount < number && item.amount < closestRight.amount) {
+                    closestRight = item.amount
+                }
+                if (item.amount > number && item.amount > closestRight.amount) {
+                    closestLeft = item.amount
+                }
+            })
+        });
+        console.log('closestRight',closestRight); // TODO console.log
+        console.log('closestLeft',closestLeft); // TODO console.log
+    };
+
     render() {
         const { n, m, matrix } = this.state;
         const table = matrix.map((tr, i) => {
@@ -121,6 +137,7 @@ class App extends Component {
                     m={i}
                     n={j}
                     onIncreaseValue={this.increaseValue}
+                    onMouseEnter={this.lightOn}
                 />
                 )}</tr>
         });
@@ -138,7 +155,7 @@ class App extends Component {
 
         const tableAvg = this.getAvg(matrix).map((td, i) => {
             return <td key={i}>{td}</td>
-        })
+        });
 
 
 
