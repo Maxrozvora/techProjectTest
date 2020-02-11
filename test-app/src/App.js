@@ -6,11 +6,15 @@ class App extends Component {
         super(props);
         this.state = {
             matrix: [],
-            m: '',
-            n: ''
+            m: 3,
+            n: 3,
+            sum: []
         };
     }
 
+    componentDidMount() {
+        this.generateMatrix()
+    }
 
     handleChange = (e) => {
         console.log('teste', e); // TODO console.log
@@ -47,8 +51,7 @@ class App extends Component {
         }
         this.setState({
             matrix
-        })
-
+        });
     };
 
     getRandom = () => {
@@ -59,19 +62,37 @@ class App extends Component {
 
     getID = () => {
     return Math.random().toString(36).substr(2, 9);
-    }
+    };
 
     generateTable = () => {
         this.state.matrix.map(row => {
             return <tr>{row.map(td => <td>{td.amount}</td>)}</tr>
         })
+    };
+
+
+    getSum = (arr) => {
+        let sum = 0;
+        arr.forEach(item => {
+            sum +=item.amount
+        });
+        return sum;
     }
 
     render() {
         const { n, m } = this.state;
-        const table = this.state.matrix.map(tr => {
-            return <tr>{tr.map(td => <TableCell key={td.id} value={td.amount} />)}</tr>
+        const table = this.state.matrix.map((tr, i) => {
+            return <tr key={i}>{tr.map(td => <TableCell key={td.id} value={td.amount} />)}</tr>
+        });
+
+        const tableSum = this.state.matrix.map((tr,i) => {
+            return <tr key={i}>
+                <td>
+                    {this.getSum(tr)}
+                </td>
+            </tr>
         })
+
         return (
             <div>
                 <div>
@@ -93,16 +114,26 @@ class App extends Component {
                 </div>
                 <hr/>
                 <div>
-                    <table>
-                        <tbody>
+                    <div style={displayFlex}>
+                        <table>
+                            <tbody>
                             {table}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                        <table>
+                            <tbody>
+                            {tableSum}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
             </div>
         );
     }
+}
+
+const displayFlex = {
+    display: 'flex'
 }
 
 export default App;
