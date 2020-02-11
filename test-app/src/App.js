@@ -90,7 +90,10 @@ class App extends Component {
         }, []).map(e => (e / arr.length).toFixed(1));
     };
 
-    removeRow = () => {
+    removeRow = (i) => {
+        const matrix = this.state.matrix;
+        matrix.splice(i,1);
+        this.setState({matrix})
 
     };
     addRow = () => {
@@ -126,6 +129,9 @@ class App extends Component {
             return <tr key={i}>
                 <td>
                     {this.getSum(tr)}
+                </td>
+                <td>
+                    <button onClick={(e) => this.removeRow(i, e)}>remove row</button>
                 </td>
             </tr>
         });
@@ -177,7 +183,6 @@ class App extends Component {
                         </tbody>
                     </table>
                     <div>
-                        <button onClick={this.removeRow}>Remove row</button>
                         <button onClick={this.addRow}>Add row</button>
                     </div>
                 </div>
