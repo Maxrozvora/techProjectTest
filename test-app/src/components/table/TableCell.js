@@ -9,7 +9,7 @@ class TableCell extends Component {
     };
     render() {
         const {value, m, sum, hoverRow} = this.props;
-        const percent = (value/sum * 100).toFixed(1);
+        const percent = (value/sum * 100).toFixed();
         const showPercent = m === hoverRow;
         const width = {
             width: percent + '%'

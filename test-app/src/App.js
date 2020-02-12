@@ -30,10 +30,6 @@ class App extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.generateMatrix();
-        this.setState({
-            m: '',
-            n: ''
-        })
     };
 
     generateMatrix = () => {
@@ -129,13 +125,11 @@ class App extends Component {
         console.log('closestLeft',closestLeft); // TODO console.log
     };
     togglePercent = (i, sum = null) => {
-        console.log('test', i); // TODO console.log
-        console.log('sum', sum); // TODO console.log
         this.setState({
             hoverRow: i,
             sum
         })
-    }
+    };
 
     render() {
         const { n, m, matrix, hoverRow, sum } = this.state;
@@ -172,8 +166,6 @@ class App extends Component {
         const tableAvg = this.getAvg(matrix).map((td, i) => {
             return <td key={i}>{td}</td>
         });
-
-
 
         return (
             <div>
