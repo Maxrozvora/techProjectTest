@@ -9,7 +9,9 @@ class App extends Component {
             matrix: [],
             m: 3,
             n: 4,
-            sum: []
+            sum: null,
+            hoverRow: null,
+
         };
     }
 
@@ -126,9 +128,17 @@ class App extends Component {
         console.log('closestRight',closestRight); // TODO console.log
         console.log('closestLeft',closestLeft); // TODO console.log
     };
+    togglePercent = (i, sum = null) => {
+        console.log('test', i); // TODO console.log
+        console.log('sum', sum); // TODO console.log
+        this.setState({
+            hoverRow: i,
+            sum
+        })
+    }
 
     render() {
-        const { n, m, matrix } = this.state;
+        const { n, m, matrix, hoverRow, sum } = this.state;
         const table = matrix.map((tr, i) => {
             return <tr key={i}>{tr.map((td, j) =>
                 <TableCell
@@ -136,6 +146,8 @@ class App extends Component {
                     value={td.amount}
                     m={i}
                     n={j}
+                    hoverRow={hoverRow}
+                    sum={sum}
                     onIncreaseValue={this.increaseValue}
                     onMouseEnter={this.lightOn}
                 />
@@ -143,9 +155,13 @@ class App extends Component {
         });
 
         const tableSum = matrix.map((tr,i) => {
+            const sum = this.getSum(tr);
             return <tr key={i}>
-                <td>
-                    {this.getSum(tr)}
+                <td
+                    onMouseOver={() => this.togglePercent(i, sum)}
+                    onMouseLeave={() => this.togglePercent(null)}
+                >
+                    {sum}
                 </td>
                 <td className="td-btn">
                     <button className="btn btn-remove" onClick={(e) => this.removeRow(i, e)}>remove row</button>

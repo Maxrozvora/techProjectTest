@@ -48,7 +48,7 @@ body {
 }
 
 .btn-create {
-  padding: 9px;  
+  padding: 9px;
 }
 
 .btn-remove {
@@ -60,7 +60,7 @@ body {
   background: #1f522f;
 }
 
-.table {  
+.table {
   margin: 1rem 0;
 }
 
@@ -78,3 +78,20 @@ body {
   padding: 0 .75rem;
   vertical-align: middle;
 }
+.td-value {
+  position: relative;
+}
+.td-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  background: #574fd4;
+  height: 100%;
+}
+
+.td-number {
+  position: relative;
+}
+
+
