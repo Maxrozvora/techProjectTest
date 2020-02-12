@@ -149,7 +149,7 @@ class App extends Component {
                 <td>
                     {this.getSum(tr)}
                 </td>
-                <td>
+                <td className="td-btn">
                     <button className="btn btn-remove" onClick={(e) => this.removeRow(i, e)}>remove row</button>
                 </td>
             </tr>
@@ -182,27 +182,24 @@ class App extends Component {
                             <button className="btn btn-create" type="submit">Create matrix</button>                           
                         </form>
                     </div>
-                <hr/>
                 <div>
                     <div style={displayFlex}>
-                        <table className="table">
+                        <table className="table table-w100">
                             <tbody>
                             {table}
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    {tableAvg}
+                                </tr>
+                            </tfoot>
                         </table>
                         <table className="table">
                             <tbody>
                             {tableSum}
                             </tbody>
                         </table>
-                    </div>
-                    <table className="table">
-                        <tbody>
-                        <tr>
-                            {tableAvg}
-                        </tr>
-                        </tbody>
-                    </table>
+                    </div>                    
                     <div>
                         <button className="btn btn-add" onClick={this.addRow}>Add row</button>
                     </div>
