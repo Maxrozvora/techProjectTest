@@ -106,22 +106,20 @@ class App extends Component {
     };
 
     lightOn = (m,n) => {
-        // console.log('m,n',m,n); // TODO console.log
         const matrix = this.state.matrix;
         const number = matrix[m][n].amount;
-        console.log(number); // TODO console.log
-        // const closestRight = matrix.filter(n => n.amount > number)
         let closestRight =  matrix[0][0];
         let closestLeft  =  matrix[0][0];
-        matrix.forEach((data,i) => {
+        let current;
+        matrix.forEach((data) => {
             data.forEach(item => {
                 console.log(item.amount, 'i');
-                
-                if (item.amount < number && item.amount < closestRight.amount) {
-                    closestRight = item
-                }
-                if (item.amount > number && item.amount > closestRight.amount) {
+                current = item.amount;
+                if (current < number && (typeof closestLeft === 'undefined' ||  closestLeft.amount < current)) {
                     closestLeft = item
+                }
+                if (current > number && (typeof closestLeft === 'undefined' || closestRight.amount > current)) {
+                    closestRight = item
                 }
             })
         });
@@ -164,7 +162,7 @@ class App extends Component {
         return (
             <div>
                 <div className="form-wrap">
-                    <form onSubmit={this.handleSubmit} className="form">                        
+                    <form onSubmit={this.handleSubmit} className="form">
                             <input
                             className="form_input"
                                 type="text"
@@ -178,8 +176,8 @@ class App extends Component {
                                 value={n}
                                 onChange={this.handleChange}
                                 name="n"
-                            />                            
-                            <button className="btn btn-create" type="submit">Create matrix</button>                           
+                            />
+                            <button className="btn btn-create" type="submit">Create matrix</button>
                         </form>
                     </div>
                 <div>
@@ -199,7 +197,7 @@ class App extends Component {
                             {tableSum}
                             </tbody>
                         </table>
-                    </div>                    
+                    </div>
                     <div>
                         <button className="btn btn-add" onClick={this.addRow}>Add row</button>
                     </div>
