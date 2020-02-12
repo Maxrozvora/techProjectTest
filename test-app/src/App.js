@@ -11,7 +11,8 @@ class App extends Component {
             n: 4,
             sum: null,
             hoverRow: null,
-
+            closestLeft: null,
+            closestRight: null
         };
     }
 
@@ -103,7 +104,7 @@ class App extends Component {
         })
     };
 
-    lightOn = (m,n) => {
+    findClosest = (m,n) => {
         const matrix = this.state.matrix;
         const number = matrix[m][n].amount;
         let closestRight =  matrix[0][0];
@@ -114,16 +115,31 @@ class App extends Component {
                 console.log(item.amount, 'i');
                 current = item.amount;
                 if (current < number && (typeof closestLeft === 'undefined' ||  closestLeft.amount < current)) {
-                    closestLeft = item
+                    closestLeft = item.amount
                 }
                 if (current > number && (typeof closestLeft === 'undefined' || closestRight.amount > current)) {
-                    closestRight = item
+                    closestRight = item.amount
                 }
             })
         });
         console.log('closestRight',closestRight); // TODO console.log
         console.log('closestLeft',closestLeft); // TODO console.log
+
+        this.setState({
+            closestRight,
+            closestLeft
+        })
+
     };
+
+    clearClosest = () => {
+        console.log('test'); // TODO console.log
+        this.setState({
+            closestLeft: null,
+            closestRight: null
+        })
+    }
+
     togglePercent = (i, sum = null) => {
         this.setState({
             hoverRow: i,
@@ -132,7 +148,7 @@ class App extends Component {
     };
 
     render() {
-        const { n, m, matrix, hoverRow, sum } = this.state;
+        const { n, m, matrix, hoverRow, sum, closestRight, closestLeft } = this.state;
         const table = matrix.map((tr, i) => {
             return <tr key={i}>{tr.map((td, j) =>
                 <TableCell
@@ -142,8 +158,11 @@ class App extends Component {
                     n={j}
                     hoverRow={hoverRow}
                     sum={sum}
+                    closestRight={closestRight}
+                    closestLeft={closestLeft}
                     onIncreaseValue={this.increaseValue}
-                    onMouseEnter={this.lightOn}
+                    onMouseEnter={this.findClosest}
+                    onMouseLeave={this.clearClosest}
                 />
                 )}</tr>
         });
@@ -177,6 +196,7 @@ class App extends Component {
                                 value={m}
                                 onChange={this.handleChange}
                                 name="m"
+                                required
                             />
                             <input
                             className="form_input"
@@ -184,6 +204,7 @@ class App extends Component {
                                 value={n}
                                 onChange={this.handleChange}
                                 name="n"
+                                required
                             />
                             <button className="btn btn-create" type="submit">Create matrix</button>
                         </form>

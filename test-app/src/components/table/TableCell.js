@@ -8,16 +8,17 @@ class TableCell extends Component {
         this.props.onMouseEnter(this.props.m,this.props.n)
     };
     render() {
-        const {value, m, sum, hoverRow} = this.props;
+        const {value, m, sum, hoverRow, closestRight, closestLeft} = this.props;
         const percent = (value/sum * 100).toFixed();
         const showPercent = m === hoverRow;
         const width = {
             width: percent + '%'
         };
+        const isClosest = closestRight === value || closestLeft === value
         return (
-            <td
+            <td className={isClosest ? 'closest' : ''}
                 onClick={this.increaseValue}
-                onMouseEnter={this.lightOn}
+                onMouseOver={this.lightOn}
             >
                 <div className="td-value" style={width}>
                     {showPercent ?  <div className="td-line"></div> : '' }
