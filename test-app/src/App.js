@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TableCell from "./components/table/TableCell";
+import './App.css'
 
 class App extends Component {
     constructor(props) {
@@ -113,13 +114,14 @@ class App extends Component {
         let closestRight =  matrix[0][0];
         let closestLeft  =  matrix[0][0];
         matrix.forEach((data,i) => {
-            console.log('data', data); // TODO console.log
             data.forEach(item => {
+                console.log(item.amount, 'i');
+                
                 if (item.amount < number && item.amount < closestRight.amount) {
-                    closestRight = item.amount
+                    closestRight = item
                 }
                 if (item.amount > number && item.amount > closestRight.amount) {
-                    closestLeft = item.amount
+                    closestLeft = item
                 }
             })
         });
@@ -148,7 +150,7 @@ class App extends Component {
                     {this.getSum(tr)}
                 </td>
                 <td>
-                    <button onClick={(e) => this.removeRow(i, e)}>remove row</button>
+                    <button className="btn btn-remove" onClick={(e) => this.removeRow(i, e)}>remove row</button>
                 </td>
             </tr>
         });
@@ -161,38 +163,40 @@ class App extends Component {
 
         return (
             <div>
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <input
-                            type="text"
-                            value={m}
-                            onChange={this.handleChange}
-                            name="m"
-                        />
-                        <input
-                            type="text"
-                            value={n}
-                            onChange={this.handleChange}
-                            name="n"
-                        />
-                        <button type="submit">Create matrix</button>
-                    </form>
-                </div>
+                <div className="form-wrap">
+                    <form onSubmit={this.handleSubmit} className="form">                        
+                            <input
+                            className="form_input"
+                                type="text"
+                                value={m}
+                                onChange={this.handleChange}
+                                name="m"
+                            />
+                            <input
+                            className="form_input"
+                                type="text"
+                                value={n}
+                                onChange={this.handleChange}
+                                name="n"
+                            />                            
+                            <button className="btn btn-create" type="submit">Create matrix</button>                           
+                        </form>
+                    </div>
                 <hr/>
                 <div>
                     <div style={displayFlex}>
-                        <table>
+                        <table className="table">
                             <tbody>
                             {table}
                             </tbody>
                         </table>
-                        <table>
+                        <table className="table">
                             <tbody>
                             {tableSum}
                             </tbody>
                         </table>
                     </div>
-                    <table>
+                    <table className="table">
                         <tbody>
                         <tr>
                             {tableAvg}
@@ -200,7 +204,7 @@ class App extends Component {
                         </tbody>
                     </table>
                     <div>
-                        <button onClick={this.addRow}>Add row</button>
+                        <button className="btn btn-add" onClick={this.addRow}>Add row</button>
                     </div>
                 </div>
             </div>
