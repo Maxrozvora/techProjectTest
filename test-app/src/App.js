@@ -106,24 +106,12 @@ class App extends Component {
 
     findClosest = (m,n) => {
         const matrix = this.state.matrix;
+        const arr = matrix.flat();
+        const sort = arr.sort((a,b) => a.amount - b.amount);
         const number = matrix[m][n].amount;
-        let closestRight =  matrix[0][0];
-        let closestLeft  =  matrix[0][0];
-        let current;
-        matrix.forEach((data) => {
-            data.forEach(item => {
-                console.log(item.amount, 'i');
-                current = item.amount;
-                if (current < number && (typeof closestLeft === 'undefined' ||  closestLeft.amount < current)) {
-                    closestLeft = item.amount
-                }
-                if (current > number && (typeof closestLeft === 'undefined' || closestRight.amount > current)) {
-                    closestRight = item.amount
-                }
-            })
-        });
-        console.log('closestRight',closestRight); // TODO console.log
-        console.log('closestLeft',closestLeft); // TODO console.log
+        const index = sort.findIndex(item => item.amount === number);
+        let closestRight =  sort[index !== 0 && index !== sort.length -1 ? index - 1 : 1].amount;
+        let closestLeft  =  sort[index !== 0 && index !== sort.length -1 ? index + 1 : sort.length - 2].amount;
 
         this.setState({
             closestRight,
@@ -187,7 +175,7 @@ class App extends Component {
         });
 
         return (
-            <div>
+            <div className="container">
                 <div className="form-wrap">
                     <form onSubmit={this.handleSubmit} className="form">
                         <h2 className="title">Matrix generator</h2>
@@ -195,7 +183,7 @@ class App extends Component {
                             <label htmlFor="m">X: </label>
                             <input
                                 className="form_input"
-                                type="text"
+                                type="number"
                                 value={m}
                                 onChange={this.handleChange}
                                 name="m"
@@ -207,12 +195,12 @@ class App extends Component {
                             <label htmlFor="n">Y: </label>
                             <input
                                 className="form_input"
-                                type="text"
+                                type="number"
                                 value={n}
                                 onChange={this.handleChange}
                                 name="n"
                                 required
-                                id="m"
+                                id="n"
                             />
                         </div>
                             <button className="btn btn-create" type="submit">Create matrix</button>
@@ -220,7 +208,7 @@ class App extends Component {
                     </div>
                 <div>
                     <div className="d-flex">
-                        <table className="table table-w100">
+                        <table className="table table-w100 table-matrix">
                             <tbody>
                             {table}
                             </tbody>

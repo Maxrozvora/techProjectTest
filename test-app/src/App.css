@@ -1,6 +1,12 @@
 body {
     background-color: #282c34;
     color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .title {
@@ -72,6 +78,10 @@ label {
     border: 1px solid #61dafb;
     padding: .75rem;
     vertical-align: top;
+}
+
+.table-matrix tbody td:hover {
+    background-color: #21505d;
 }
 
 .table .td-btn {
