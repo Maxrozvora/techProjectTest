@@ -173,6 +173,8 @@ class App extends Component {
             return <td key={i}>{td}</td>
         });
 
+        const valid = !(this.state.m && this.state.n);
+
         return (
             <div className="container">
                 <div className="form-wrap">
@@ -202,7 +204,7 @@ class App extends Component {
                                 id="n"
                             />
                         </div>
-                            <button className="btn btn-create" type="submit">Create matrix</button>
+                            <button className="btn btn-create" type="submit" disabled={valid}>Create matrix</button>
                         </form>
                     </div>
                 <div>
@@ -224,7 +226,7 @@ class App extends Component {
                         </table>
                     </div>
                     <div>
-                        <button className="btn btn-add" onClick={this.addRow}>Add row</button>
+                        <button className="btn btn-add" onClick={this.addRow} disabled={valid}>Add row</button>
                     </div>
                 </div>
             </div>

@@ -110,4 +110,8 @@ label {
     background: #d44e4e;
 }
 
+button[disabled] {
+    opacity: .3;
+}
+
 
