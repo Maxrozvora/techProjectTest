@@ -3,20 +3,13 @@ body {
     color: white;
 }
 
-.App-header {
-    min-height: 100vh;
+.title {
+    text-transform: uppercase;
+}
+
+.d-flex {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
 }
-
-.App-link {
-    color: #61dafb;
-}
-
 
 .form-wrap {
     display: flex;
@@ -38,6 +31,12 @@ body {
     color: #fff;
 }
 
+label {
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+
 .btn {
     color: #fff;
     background-color: #4fb7d4;
@@ -49,6 +48,7 @@ body {
 
 .btn-create {
     padding: 9px;
+    margin-top: 5px;
 }
 
 .btn-remove {

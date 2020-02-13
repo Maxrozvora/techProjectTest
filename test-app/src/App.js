@@ -190,27 +190,36 @@ class App extends Component {
             <div>
                 <div className="form-wrap">
                     <form onSubmit={this.handleSubmit} className="form">
+                        <h2 className="title">Matrix generator</h2>
+                        <div>
+                            <label htmlFor="m">X: </label>
                             <input
-                            className="form_input"
+                                className="form_input"
                                 type="text"
                                 value={m}
                                 onChange={this.handleChange}
                                 name="m"
                                 required
+                                id="m"
                             />
+                        </div>
+                        <div>
+                            <label htmlFor="n">Y: </label>
                             <input
-                            className="form_input"
+                                className="form_input"
                                 type="text"
                                 value={n}
                                 onChange={this.handleChange}
                                 name="n"
                                 required
+                                id="m"
                             />
+                        </div>
                             <button className="btn btn-create" type="submit">Create matrix</button>
                         </form>
                     </div>
                 <div>
-                    <div style={displayFlex}>
+                    <div className="d-flex">
                         <table className="table table-w100">
                             <tbody>
                             {table}
@@ -236,8 +245,5 @@ class App extends Component {
     }
 }
 
-const displayFlex = {
-    display: 'flex'
-}
 
 export default App;
