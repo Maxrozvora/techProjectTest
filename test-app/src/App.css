@@ -1,100 +1,103 @@
 body {
-  background-color: #282c34;
-  color: white;
+    background-color: #282c34;
+    color: white;
 }
 
 .App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 
 .form-wrap {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .form {
-  width: 300px;
-  text-align: center;
+    width: 300px;
+    text-align: center;
 }
 
 .form_input {
-  width: 200px;
-  padding: 5px;
-  margin: 5px 0;
-  font-size: 20px;
-  background-color: #333944;
-  border: 1px solid #61dafb;
-  color: #fff;
+    width: 200px;
+    padding: 5px;
+    margin: 5px 0;
+    font-size: 20px;
+    background-color: #333944;
+    border: 1px solid #61dafb;
+    color: #fff;
 }
 
 .btn {
-  color: #fff;
-  background-color: #4fb7d4;
-  padding: 5px;
-  border: 1px solid #61dafb;
-  text-transform: uppercase;
-  font-weight: bold;
+    color: #fff;
+    background-color: #4fb7d4;
+    padding: 5px;
+    border: 1px solid #61dafb;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .btn-create {
-  padding: 9px;
+    padding: 9px;
 }
 
 .btn-remove {
-  background: #d44e4e;
-  white-space: nowrap;
+    background: #d44e4e;
+    white-space: nowrap;
 }
 
 .btn-add {
-  background: #1f522f;
+    background: #1f522f;
 }
 
 .table {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }
 
 .table-w100 {
-  width: 100%
+    width: 100%
 }
 
 .table td {
-  border: 1px solid #61dafb;
-  padding: .75rem;
-  vertical-align: top;
+    border: 1px solid #61dafb;
+    padding: .75rem;
+    vertical-align: top;
 }
 
 .table .td-btn {
-  padding: 0 .75rem;
-  vertical-align: middle;
+    padding: 0 .75rem;
+    vertical-align: middle;
 }
+
 .td-value {
-  position: relative;
+    position: relative;
 }
+
 .td-line {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  background: #574fd4;
-  height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    background: #574fd4;
+    height: 100%;
 }
 
 .td-number {
-  position: relative;
+    position: relative;
 }
+
 .closest {
-  background: #d44e4e;
+    background: #d44e4e;
 }
 
 
