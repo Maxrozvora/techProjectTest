@@ -5,7 +5,10 @@ class TableCell extends Component {
         this.props.onIncreaseValue(this.props.m,this.props.n);
     };
     lightOn = () => {
-        this.props.onMouseEnter(this.props.m,this.props.n)
+        this.props.onMouseOver(this.props.m,this.props.n)
+    };
+    lightOff = () => {
+        this.props.onMouseLeave()
     };
     render() {
         const {value, m, sum, hoverRow, closestRight, closestLeft} = this.props;
@@ -19,6 +22,7 @@ class TableCell extends Component {
             <td className={isClosest ? 'closest' : ''}
                 onClick={this.increaseValue}
                 onMouseOver={this.lightOn}
+                onMouseLeave={this.lightOff}
             >
                 <div className="td-value" style={width}>
                     {showPercent ?  <div className="td-line"></div> : '' }

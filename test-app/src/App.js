@@ -121,7 +121,6 @@ class App extends Component {
     };
 
     clearClosest = () => {
-        console.log('test'); // TODO console.log
         this.setState({
             closestLeft: null,
             closestRight: null
@@ -149,7 +148,7 @@ class App extends Component {
                     closestRight={closestRight}
                     closestLeft={closestLeft}
                     onIncreaseValue={this.increaseValue}
-                    onMouseEnter={this.findClosest}
+                    onMouseOver={this.findClosest}
                     onMouseLeave={this.clearClosest}
                 />
                 )}</tr>
