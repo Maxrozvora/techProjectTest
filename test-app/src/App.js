@@ -122,7 +122,6 @@ class App extends Component {
 
     findClosest = (m,n) => {
         const matrix = this.state.matrix;
-        // let closestRight;
         let closestLeft = matrix[m][n].amount;
         let closestRight = matrix[m][n].amount;
         let minDiff = 1000;
@@ -132,13 +131,13 @@ class App extends Component {
             for (let j = 0; j < matrix[i].length; j++) {
 
                 let result = Math.abs(number - matrix[i][j].amount);
-                // if (number - matrix[i][j].amount === 0)
-                //     continue;
+                if (number - matrix[i][j].amount === 0)
+                    continue;
                 if (result < minDiff && matrix[i][j].amount < number) {
                     minDiff = result;
                     closestLeft = matrix[i][j].amount;
                 }
-                if (result < minDiff && matrix[i][j].amount > number) {
+                if (result < minDif2 && matrix[i][j].amount > number) {
                     minDif2 = result;
                     closestRight = matrix[i][j].amount;
                 }
