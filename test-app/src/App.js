@@ -104,21 +104,51 @@ class App extends Component {
         })
     };
 
+    // findClosest = (m,n) => {
+    //     const matrix = this.state.matrix;
+    //     const arr = matrix.flat();
+    //     const sort = arr.sort((a,b) => a.amount - b.amount);
+    //     const number = matrix[m][n].amount;
+    //     const index = sort.findIndex(item => item.amount === number);
+    //     let closestRight =  sort[index !== 0 && index !== sort.length -1 ? index - 1 : 1].amount;
+    //     let closestLeft  =  sort[index !== 0 && index !== sort.length -1 ? index + 1 : sort.length - 2].amount;
+    //
+    //     this.setState({
+    //         closestRight,
+    //         closestLeft
+    //     })
+    //
+    // };
+
     findClosest = (m,n) => {
         const matrix = this.state.matrix;
-        const arr = matrix.flat();
-        const sort = arr.sort((a,b) => a.amount - b.amount);
+        // let closestRight;
+        let closestLeft = matrix[m][n].amount;
+        let closestRight = matrix[m][n].amount;
+        let minDiff = 1000;
+        let minDif2 = 1000;
         const number = matrix[m][n].amount;
-        const index = sort.findIndex(item => item.amount === number);
-        let closestRight =  sort[index !== 0 && index !== sort.length -1 ? index - 1 : 1].amount;
-        let closestLeft  =  sort[index !== 0 && index !== sort.length -1 ? index + 1 : sort.length - 2].amount;
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[i].length; j++) {
 
+                let result = Math.abs(number - matrix[i][j].amount);
+                // if (number - matrix[i][j].amount === 0)
+                //     continue;
+                if (result < minDiff && matrix[i][j].amount < number) {
+                    minDiff = result;
+                    closestLeft = matrix[i][j].amount;
+                }
+                if (result < minDiff && matrix[i][j].amount > number) {
+                    minDif2 = result;
+                    closestRight = matrix[i][j].amount;
+                }
+            }
+        }
         this.setState({
-            closestRight,
-            closestLeft
-        })
-
-    };
+                    closestRight,
+                    closestLeft
+                })
+    }
 
     clearClosest = () => {
         this.setState({
